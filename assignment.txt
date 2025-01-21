@@ -1,0 +1,43 @@
+### Project Title: Cloud-Native E-Commerce Platform with Secure User Authentication
+
+### Overview:
+In this project, you will develop a cloud-native e-commerce platform that allows users to browse products, add them to a shopping cart, and complete purchases. The platform will be built using a microservices architecture, leveraging Ballerina for backend services, Choreo for deployment and lifecycle management, and Asgardeo for secure user authentication and access control. This project will test your ability to integrate various technologies and frameworks to create a scalable, secure, and user-friendly application.
+
+### Key Features:
+1. **Product Catalog Service**:
+   - Develop a backend service using Ballerina to manage the product catalog, including CRUD operations for products.
+   - Implement RESTful APIs to allow frontend applications to interact with the product catalog.
+
+2. **Shopping Cart Service**:
+   - Create a microservice to handle shopping cart operations, such as adding, removing, and updating items in the cart.
+   - Ensure the service can handle concurrent requests and maintain session data.
+
+3. **Order Management Service**:
+   - Implement a service to process orders, including order creation, payment processing, and order status tracking.
+   - Use Ballerina to integrate with a mock payment gateway.
+
+4. **User Authentication and Authorization**:
+   - Utilize Asgardeo to implement secure user authentication, including registration, login, and logout functionalities.
+   - Implement role-based access control to restrict access to certain features based on user roles (e.g., admin, customer).
+
+5. **Frontend Application**:
+   - Develop a responsive frontend using Next.js and React to provide a seamless user experience.
+   - Use TypeScript for type safety and jQuery for DOM manipulation where necessary.
+
+6. **Database Management**:
+   - Use PostgreSQL for relational data storage, such as user information and order details.
+   - Implement a NoSQL database like MongoDB for storing product catalog data to demonstrate flexibility in data management.
+
+7. **Deployment and Observability**:
+   - Deploy the application using Choreo, setting up CI/CD pipelines for automated testing and deployment.
+   - Implement observability features such as logging, monitoring, and alerting to ensure the application is running smoothly.
+
+### Technical Requirements:
+- **Backend**: Use Ballerina to develop microservices for product catalog, shopping cart, and order management.
+- **Frontend**: Build the user interface with Next.js and React, incorporating TypeScript for enhanced development experience.
+- **Database**: Utilize PostgreSQL for relational data and MongoDB for NoSQL data.
+- **Deployment**: Leverage Choreo for deploying the application, managing CI/CD pipelines, and ensuring scalability.
+- **Authentication**: Implement user authentication and access control using Asgardeo, ensuring secure and modern identity management.
+
+### Real-World Relevance:
+This project simulates a real-world scenario where you need to build a scalable, secure, and user-friendly e-commerce platform. It tests your ability to integrate various technologies, manage cloud-native deployments, and implement secure authentication mechanisms. By completing this project, you will demonstrate your proficiency in backend development with Ballerina, frontend development with modern JavaScript frameworks, and cloud-native application management using Choreo and Asgardeo.

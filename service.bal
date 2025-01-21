@@ -3,6 +3,7 @@ import backend.convertor;
 
 import ballerina/http;
 import ballerina/log;
+import ballerina/io;
 
 @http:ServiceConfig {
     cors: {
@@ -16,6 +17,7 @@ import ballerina/log;
 
 
 service / on new http:Listener(9900) {
+
     resource function post smartDocInsightsAPI(DocumentUploadRecord documentUploadRecord) returns json|error {
 
         string[] images = [];
@@ -47,8 +49,55 @@ service / on new http:Listener(9900) {
             return error(string `Error getting chat completion: ${imageContent.message()}`);
         }
 
+        check io:fileWriteJson("resume.json", imageContent);
+
         log:printInfo("Returning the extracted content");
 
         return imageContent;
+    }
+
+    resource function post userDetails(ResumeRecord userRecord) returns json|error {
+
+        check io:fileWriteJson("userUpdatedDetails.json", userRecord);
+
+        // Initialize the prompt variable
+        string prompt = "";
+
+        // Determine the prompt based on the userPromptType.role
+        match userRecord.jobRole {
+            "Software Engineer" => {
+                prompt = SOFTWARE_ENGINEER_PROMPT;
+            }
+            "Senior Software Engineer" => {
+                prompt = SENIOR_SOFTWARE_ENGINEER_PROMPT;
+            }
+            "Intern Software Engineer" => {
+                prompt = INTERN_SOFTWARE_ENGINEER_PROMPT;
+            }
+            "DevOps Engineer" => {
+                prompt = DEVOPS_ENGINEER_PROMPT;
+            }
+            "Data Scientist" => {
+                prompt = DATA_SCIENTIST_PROMPT;
+            }
+            "Product Manager" => {
+                prompt = PRODUCT_MANAGER_PROMPT;
+            }
+            _ => {
+                return error("Invalid job role.");
+            }
+        }
+
+        // Simulate AI chat completion endpoint (for demonstration purposes)
+        string?|error response = ai:assigmentPreparation(prompt);
+
+        if response is error {
+            return  error("Error getting chat completion: " + response.message());
+        }
+
+        // Write the response to a file named "assignment.txt"
+        check io:fileWriteString("assignment.txt", response.toString());
+
+        return response;
     }
 }

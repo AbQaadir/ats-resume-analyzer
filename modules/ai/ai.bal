@@ -3,6 +3,59 @@ import ballerina/lang.value;
 import ballerinax/openai.chat;
 
 
+# Retrieves structured content from images using the AI model.
+#
+# + userPrompt - The user's prompt to the AI model.
+# + return - Returns a `chat:CreateChatCompletionResponse` containing AI-extracted content or an error if the request fails.
+public isolated function assigmentPreparation(string userPrompt) returns string?|error {
+
+
+    chat:ChatCompletionRequestMessageContentPartText textMessage = {
+        "text": userPrompt,
+        "type": "text"
+    };
+
+    chat:ChatCompletionRequestUserMessage userMessage = {
+        "role": "user",
+        "content": [textMessage]
+    };
+
+    chat:ChatCompletionRequestMessage systemMessage = {
+        "role": "system",
+        "content": ASSIGNMENT_MAKER_SYSTEM_PROMPT
+    };
+
+    chat:CreateChatCompletionRequest chatRequest = {
+        model: "gpt-4o",
+        messages: [systemMessage, userMessage],
+        temperature: 0
+    };
+
+    chat:CreateChatCompletionResponse|error chatResponse = openaiClient->/chat/completions.post(chatRequest);
+
+    if chatResponse is error {
+        return error(string `Error getting chat completion: ${chatResponse.message()}`);
+    }
+
+    // Parse the actual JSON response
+    return chatResponse.choices[0].message.content;
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Extracts applicant details from a list of base64-encoded images of resumes.
 #
 # + encodedFiles - A list of base64 encoded files (images) to be processed.
@@ -65,7 +118,7 @@ public function retrieveContentFromImages(string[] imageUrls) returns chat:Creat
 
     chat:ChatCompletionRequestMessage systemMessage = {
         "role": "system",
-        "content": SYSTEM_PROMPT
+        "content": USER_DETAIL_EXTRACTOR_SYSTEM_PROMPT
     };
 
     chat:CreateChatCompletionRequest_response_format responseSpecification = {
