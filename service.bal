@@ -49,7 +49,7 @@ service / on new http:Listener(9900) {
             return error(string `Error getting chat completion: ${imageContent.message()}`);
         }
 
-        check io:fileWriteJson("resume.json", imageContent);
+        // check io:fileWriteJson("resume.json", imageContent);
 
         log:printInfo("Returning the extracted content");
 
@@ -58,7 +58,7 @@ service / on new http:Listener(9900) {
 
     resource function post userDetails(ResumeRecord userRecord) returns json|error {
 
-        check io:fileWriteJson("userUpdatedDetails.json", userRecord);
+        // check io:fileWriteJson("userUpdatedDetails.json", userRecord);
 
         // Initialize the prompt variable
         string prompt = "";
@@ -96,7 +96,7 @@ service / on new http:Listener(9900) {
         }
 
         // Write the response to a file named "assignment.txt"
-        check io:fileWriteString("assignment.txt", response.toString());
+        // check io:fileWriteString("assignment.txt", response.toString());
 
         return response;
     }
