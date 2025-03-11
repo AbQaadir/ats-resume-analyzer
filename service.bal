@@ -3,7 +3,6 @@ import backend.convertor;
 
 import ballerina/http;
 import ballerina/log;
-import ballerina/io;
 
 @http:ServiceConfig {
     cors: {
@@ -49,16 +48,12 @@ service / on new http:Listener(9900) {
             return error(string `Error getting chat completion: ${imageContent.message()}`);
         }
 
-        check io:fileWriteJson("resume.json", imageContent);
-
         log:printInfo("Returning the extracted content");
 
         return imageContent;
     }
 
     resource function post userDetails(ResumeRecord userRecord) returns json|error {
-
-        check io:fileWriteJson("userUpdatedDetails.json", userRecord);
 
         // Initialize the prompt variable
         string prompt = "";
@@ -94,9 +89,6 @@ service / on new http:Listener(9900) {
         if response is error {
             return  error("Error getting chat completion: " + response.message());
         }
-
-        // Write the response to a file named "assignment.txt"
-        check io:fileWriteString("assignment.txt", response.toString());
 
         return response;
     }
