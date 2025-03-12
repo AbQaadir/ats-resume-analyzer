@@ -42,20 +42,6 @@ public isolated function assigmentPreparation(string userPrompt) returns string?
     
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # Extracts applicant details from a list of base64-encoded images of resumes.
 #
 # + encodedFiles - A list of base64 encoded files (images) to be processed.
@@ -121,7 +107,11 @@ public function retrieveContentFromImages(string[] imageUrls) returns chat:Creat
         "content": USER_DETAIL_EXTRACTOR_SYSTEM_PROMPT
     };
 
-    chat:CreateChatCompletionRequest_response_format responseSpecification = {
+    // chat:CreateChatCompletionRequest_response_format responseSpecification = {
+    //     "type": "json_object"
+    // };
+
+    chat:ResponseFormatJsonObject responseSpecification = {
         "type": "json_object"
     };
 
