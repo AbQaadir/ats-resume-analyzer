@@ -1,74 +1,32 @@
-# Resume Upload Application
+# ATS Resume Analyzer
 
-This project includes:  
-1. A **React Web UI** for uploading resumes.  
-2. A **Ballerina Backend** to handle the uploaded resumes and extract data from them.
-
----
+## Purpose
+From the job applicant's perspective, it is harder to review, extract, and memorize the insights in all the resumes manually. This implementation makes it easier by allowing the user to upload the resume, extracting all the information, making a proper JSON out of that, and returning it to the UI. The extracted information is editable by the user and can be saved in a database. At the end, an AI-generated assignment is provided based on the requirements and the role the applicant has applied for. This is to experiment with the candidate's true potential.
 
 ## Features
+- Extract key insights from the resume:
+  - Personal information
+  - Education
+  - Past experience
+  - Skills as a JSON and display in the UI
+  - Allow the user to modify the information and save it in a database
+- Generate assignments based on the job role and applicant's skills using AI
 
-### Frontend (React Web UI)
-- Simple and user-friendly interface for uploading resumes.
-- Supports uploading PDF files.
-
-### Backend (Ballerina Backend)
-- **Resume Data Extractor**:  
-  - Uploads a resume in PDF format.
-  - Converts each page of the PDF into an image.
-  - Processes the image to extract data.
-  - Generates a JSON representation of the extracted data.
-  - Sends the JSON back to the front end for display.
-
----
-
-## Requirements
-
-- **Frontend**:
-  - Node.js and npm
-- **Backend**:
-  - Ballerina runtime environment
-
----
-
-## Installation and Setup
-
-### Frontend
-1. Navigate to the `frontend/` directory:  
-   ```bash
-   cd frontend
+## Installation
+1. Install Ballerina, the programming language developed by WSO2.
+2. Clone the repository:
+   ```sh
+   git clone https://github.com/AbQaadir/ats-resume-analyzer.git
    ```
-2. Install dependencies:  
-   ```bash
-   yarn install
+3. Navigate to the root directory:
+   ```sh
+   cd ats-resume-analyzer
    ```
-3. Start the React development server:  
-   ```bash
-   yarn start
-   ```
-   The UI will be accessible at `http://localhost:3000`.
-
-### Backend
-1. Navigate to the `backend/` directory:  
-   ```bash
-   cd backend
-   ```
-2. Run the Ballerina service:  
-   ```bash
+4. Create a `Config.toml` file.
+5. Set up the `OpenAI API` key in the `Config.toml` file.
+6. Run the application:
+   ```sh
    bal run
    ```
-   The backend will be accessible at `http://localhost:8080`.
-
----
-
-## Usage
-1. Open the React Web UI in your browser.
-2. Upload a resume (PDF format) through the UI.
-3. The backend will:
-   - Convert each page of the PDF into an image.
-   - Process the images to extract relevant data.
-   - Generate a JSON response from the extracted data.
-   - Send the JSON back to the front end for display.
-
----
-"# choreo_dev_bal_backend" 
+## Prerequisites
+- OpenAI API key
